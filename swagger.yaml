@@ -1,0 +1,280 @@
+basePath: /
+definitions:
+  models.Book:
+    properties:
+      author:
+        type: string
+      genre:
+        type: string
+      id:
+        type: integer
+      quantity:
+        type: integer
+      title:
+        type: string
+    required:
+    - author
+    - genre
+    - quantity
+    - title
+    type: object
+  models.CreateRequest:
+    properties:
+      author:
+        type: string
+      genre:
+        type: string
+      quantity:
+        type: integer
+      title:
+        type: string
+    required:
+    - author
+    - genre
+    - quantity
+    - title
+    type: object
+  models.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
+  models.RegisterRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API for register, login, checkout books, etc.
+  title: Documentation API using Swagger
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login With The Username, Email and Password
+      parameters:
+      - description: Data User
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Login is completed
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Login is failed
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Errors
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Authentication Users
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Create New Account For User
+      parameters:
+      - description: Data User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: account has been created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Register is cannot possible
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Register is failed
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Register New User
+      tags:
+      - auth
+  /books:
+    get:
+      consumes:
+      - application/json
+      description: Get all books data in database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Book'
+            type: array
+      summary: Get All Books
+      tags:
+      - books
+  /books/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Find ID to Get Specific Books
+      parameters:
+      - description: ID Book
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Book'
+        "404":
+          description: Book not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get Detail About Books With ID
+      tags:
+      - books
+  /books/checkout:
+    post:
+      consumes:
+      - application/json
+      description: Checkout Books, Will be Decrease Quantity.
+      parameters:
+      - description: ID Book
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Book'
+        "400":
+          description: Id not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: book not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Checkout Books
+      tags:
+      - books
+  /books/create:
+    post:
+      consumes:
+      - application/json
+      description: Get New Books to Database
+      parameters:
+      - description: Data Book
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Book'
+        "400":
+          description: Input not valid
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create New Books
+      tags:
+      - books
+  /books/return:
+    patch:
+      consumes:
+      - application/json
+      description: Return Books by User, Will be Increase Books Quantity
+      parameters:
+      - description: ID Book
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Book'
+        "400":
+          description: Id not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Book not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Return Books
+      tags:
+      - books
+swagger: "2.0"
