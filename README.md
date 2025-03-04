@@ -18,10 +18,12 @@ A simple Library System API built with Golang and Gin.
 
 ## 🔧 Installation & Setup
 
-1️⃣ **Clone the Repository**
-git clone https://github.com/yourusername/book-management-api.git
+🔧 **Clone the Repository**
+: git clone https://github.com/yourusername/book-management-api.git
 cd book-management-api
 
- 📜 API Documentation
-Swagger API documentation is available at:
-http://localhost:8080/swagger/index.html
+🚀 **Run API**
+: go run main.go
+
+ 📜 **API Documentation**
+: http://localhost:8080/swagger/index.html in the browser
