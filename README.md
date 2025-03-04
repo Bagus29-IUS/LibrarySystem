@@ -14,13 +14,13 @@ A simple Library System API built with Golang and Gin.
 - [MySQL](https://www.mysql.com/)
 - [Swagger](https://swagger.io/)
 
+  📜 API Documentation
+Swagger API documentation is available at:
+http://localhost:8080/swagger/index.html
+
 ## 🔧 Installation & Setup
 
 1️⃣ **Clone the Repository**
 ```sh
 git clone https://github.com/yourusername/book-management-api.git
 cd book-management-api
-sh```
-📜 API Documentation
-Swagger API documentation is available at:
-http://localhost:8080/swagger/index.html
